@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "body-parser": "^1.15.2",
     "connect": "^3.5.0",
     "cors": "^2.8.1",
@@ -16,8 +17,12 @@
     "gulp-open": "^2.0.0",
     "gulp-sass": "^2.3.2",
     "http": "0.0.0",
+    "jsonwebtoken": "^7.1.9",
     "massive": "^2.5.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.11.0",
     "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {

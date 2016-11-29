@@ -5,8 +5,9 @@ app.controller('mainCtrl', function($scope, mainService){
        $scope.addToCart = function(item){
            console.log(item)
        }
-       $scope.login = function(){
-           mainService.login().then(function(response){
+       $scope.login = function(useremail, userpassword){
+           console.log(useremail, userpassword)
+           mainService.login(useremail, userpassword).then(function(response){
                console.log(response)
            })
        }

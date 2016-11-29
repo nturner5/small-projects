@@ -1,32 +1,56 @@
 'use strict';
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const cors = require('cors');
-const massive = require('massive');
-const passport = require('passport')
-var TwitterStrategy = require('passport-twitter').Strategy;
-var LocalStrategy = require('passport-local').Strategy;
+var express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    morgan = require('morgan'),
+    // jwt = require('jsonwebtoken'),
+    // session = require('express-session'),
+    // cors = require('cors'),
+    // massive = require('massive'),
+    passport = require('passport'),
+    config = require('./config/main'),
+    controller = require('./serverCtrl.js'),
+    JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt;
+    
 
-passport.use(new TwitterStrategy({
-  
-}))
-
-var db = massive.connect({connectionString : 'postgres://postgres@localhost:5432/online_store'},
-(err, localdb)=> {
-  db = localdb;
-  app.set('db', db);
-  db.set_products(()=> {
-    console.log('products table successfully reset');
-  });
-  db.set_users(()=> {
-    console.log('users table successfully reset');
-  });
-})
-
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json()); 
 app.use(express.static('./public'))
+app.use(morgan('dev'))
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+  authentication
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+var opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+opts.secretOrKey = config.secret;
+passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+    User.findOne({id: jwt_payload.sub}, function(err, user) {
+        if (err) {
+            return done(err, false);
+        }
+        if (user) {
+            done(null, user);
+        } else {
+            done(null, false);
+            // or you could create a new account
+        }
+    });
+}));
+
+
+app.post('/login', passport.authenticate('jwt', { session: false}),
+    function(req, res) {
+        console.log('login worked')
+        res.send(req.user.profile);
+    }
+);
+app.get('/api/get-all', controller.getAll)
+app.put('/api/create-user', controller.createUser)
+
+
 
 app.listen(process.env.PORT || 3000, function(){
     console.log(`listening on port ${this.address().port}` );
@@ -34,27 +58,5 @@ app.listen(process.env.PORT || 3000, function(){
 
 
 
-app.post('/login', passport.authenticate('local'),
-  function(req, res) {
-    console.log('If this function gets called, authentication was successful.')
-    // `req.user` contains the authenticated user.
-    // res.redirect('/users/' + req.user.username);
-    res.send(req.user.username)
-});
-
-
-
-app.get('/api/get-all', (req, res)=> {
-  db.get_all((err, data)=> {
-    if (err) console.log(err);
-    else res.status(200).send(data)
-  })
-})
-app.put('/api/create-user', (req, res)=> {
-  db.create_user((err, data)=> {
-    if (err) console.log(err);
-    else res.status(200).send(data)
-  })
-})
 
 
