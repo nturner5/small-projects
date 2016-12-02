@@ -1,4 +1,25 @@
-DROP TABLE IF EXISTS products; 
+
+DROP TABLE IF EXISTS cart, products, orders, users;
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+ Users Table
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    username VARCHAR(255),
+    password VARCHAR(255)
+);
+
+-- INSERT INTO users (first_name, last_name, username, password) VALUES
+-- ('Jon', 'Myrick', 'jon', '123'),
+-- ('Sara', 'Johnson', 'sara', '123');
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+ Products Table
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
@@ -15,3 +36,35 @@ INSERT INTO products (title, description, price, photo) VALUES
 ('Glasses', 'type: hipster', 44, 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=176835491'),
 ('Shoes', 'type: High Top', 100, 'http://images.vans.com/is/image/Vans/EE3BLK-HERO?$356x356$'),
 ('Socks', 'color: black', 10, 'http://statics.suitsupply.com/images/products/Socks/medium/Socks__O603_Suitsupply_Online_Store_1.jpg');
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+ Orders Table
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    userid INTEGER REFERENCES users(id),
+    completed BOOLEAN
+);
+
+-- INSERT INTO orders (userid, completed) VALUES
+-- (1, false),
+-- (2, false);
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+ Cart Table
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+CREATE TABLE cart (
+    id SERIAL PRIMARY KEY,
+    orderid INTEGER REFERENCES orders(id),
+    productid INTEGER REFERENCES products(id)
+);
+
+-- INSERT INTO cart (orderid, productid) VALUES
+-- (1, 3),
+-- (1, 4),
+-- (1, 2),
+-- (1, 5),
+-- (2, 1),
+-- (2, 5);

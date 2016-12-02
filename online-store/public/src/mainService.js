@@ -7,4 +7,7 @@ app.service('mainService', function($http){
     this.login = function(useremail, userpassword){
       return $http.post('/login', {useremail: useremail, userpassword: userpassword})
     }
+    this.addToCart = function(){
+      return $http.put('/add-to-cart', {}); 
+    }
 })

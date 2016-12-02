@@ -1,11 +1,11 @@
 'use strict';
 const gulp = require('gulp');
-const connect = require('gulp-connect');
-const open = require('gulp-open');
-const concat = require('gulp-concat');
+// const connect = require('gulp-connect');
+// const open = require('gulp-open');
+// const concat = require('gulp-concat');
 const babel = require('gulp-babel')
 const sass = require('gulp-sass');
-const livereload = require('gulp-livereload');
+// const livereload = require('gulp-livereload');
 
 gulp.task('default', ['sass']);
 

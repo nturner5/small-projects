@@ -1,4 +1,4 @@
 module.exports = {
-    'secret': 'blueberywafflehouse',
+    'TOKEN_SECRET': 'blueberywafflehouse',
     'database': 'postgres://postgres@localhost:5432/online_store'
 };
