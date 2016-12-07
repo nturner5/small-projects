@@ -1,48 +1,66 @@
 'use strict';
-app.controller('mainCtrl', function($scope, mainService, $auth, $state){
-  mainService.getData().then(response => {
-    $scope.items = response.data;
-  })
-$scope.addToCart = function(item){
-  mainService.addToCart(item).then(response => {
-    console.log(response)
-  })
-  console.log(item)
-}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
-  satellizer authentication
+  API requests
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-  $scope.login = (username, password) => {
-    $auth.login({username: username, password: password}).then(response => {
-      if (response.status === 200){
-        console.log(response.data)
-        $auth.setToken(response);
-        $state.go('home')
-        // $location.go('/home')  // this is an alternative to $state.go 
-      }
+
+app.controller('mainCtrl', ($scope, mainService, $auth, $state) => {
+    mainService.getData().then(response => {
+      $scope.items = response.data;
     })
-  }
-  $scope.signup = (username, password, firstname, lastname) => {
-    $auth.signup({firstname: firstname, lastname: lastname, username: username, password: password}).then(response => {
-      if(response.status === 200){
+    $scope.addToCart = item => {
+      mainService.addToCart(item.id, $scope.user.id).then(response => {
         console.log(response.data);
-        $auth.setToken(response);
-        $state.go('home')
-      }
-    })
-  }
-  $scope.logout = () => {
-    $auth.logout().then(() => {
-      console.log('you have been logged-out-ified')
-      $state.go('login')
-    }); 
-  }
+      })
+    }
+    $scope.checkOut = () => {
+      mainService.checkOut($scope.user.id).then(response => {
+        console.log(response.data);
+      })
+    }
+
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+      satellizer authentication
+     *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+    $scope.login = (username, password) => {
+      $auth.login({
+        username: username,
+        password: password
+      }).then(response => {
+        if (response.status === 200) {
+          $scope.user = (response.data.user);
+          $auth.setToken(response);
+          $state.go('home')
+            // $location.go('/home')  // this is an alternative to $state.go 
+        }
+      })
+    }
+    $scope.signup = (username, password, firstname, lastname) => {
+      $auth.signup({
+        firstname: firstname,
+        lastname: lastname,
+        username: username,
+        password: password
+      }).then(response => {
+        if (response.status === 200) {
+          $scope.user = (response.data.user);
+          $auth.setToken(response);
+          $state.go('home')
+        }
+      })
+    }
+    $scope.logout = () => {
+      $auth.logout().then(() => {
+        console.log('you have been logged-out-ified')
+        $state.go('login')
+      });
+    }
 
 
 
 
 
 
-}) //end of module 
+  }) //end of module
