@@ -77,20 +77,17 @@ We'll start in `index.js`, remember to check Webpack in your terminal for errors
 // index.js
 import React from "react";
 import ReactDOM from "react-dom";
-
 import "./styles.css"
 
-document.addEventListener( "DOMContentLoaded", () => {
-	const reactNode = document.getElementById( "react-node" );
+document.addEventListener( "DOMContentLoaded", () => {  // this is a check to be sure that the dom is loaded first. 
+	const reactNode = document.getElementById( "react-node" );  // this is a second check to make sure the HTML elemnt exists before rendering. 
     
-    if ( reactNode ) {
-        ReactDOM.render(
-            <h1>Hello from index.js!</h1>
-            , reactNode )
+    if ( reactNode ) { // this is the second part of the second check. 
+        ReactDOM.render(<h1>Hello from index.js!</h1>, reactNode )
     }
 } );
 ```
-
+HERE IT SHOULD MENTION THAT A NEW DIRECTORY SHOULD BE CREATED 
 Now that we are set up and rendering, we can start building our first component. Create a new file inside of the `components/` directory named `App.js` and open it up. This will be the root component of our application.
 
 * Start by importing React ( we won't need ReactDOM here! )
@@ -108,7 +105,7 @@ Now that we are set up and rendering, we can start building our first component.
 ```
 
 * At the bottom of the page export `App` as the default export.
-* Import `App` to `index.js` and replace our current `<h1>` with the App component.
+* Import `App` to `index.js` and replace our current `<h1>` with the App component. MAYBE HERE WE SHOULD MENTION IMPORTING FROM A FILE PATH 
 
 **Checkpoint:** Your browser should now be displaying a styled header of "The **facebook** Friend Machine". The code should look something like this:
 
@@ -147,9 +144,9 @@ export default App;
 
 ___
 
-With our header displaying and our app component ready for some child components, we can start building the next component: `FriendsList.js`
+With our header displaying and our app component ready for some child components, we can start building the next component: `FriendsList.js` IS THIS SUPPOSED TO BE IN THE COMPONENTS FOLDER
 
-* Start by setting up `FriendsList.js` the same as `App` was; an exported class inheriting from `React.Component` with a `render` method that returns the following JSX:
+* Start by setting up `FriendsList.js` the same as `App` was; an exported class inheriting from `React.Component` with a `render` method that returns the following JSX: SHOULD CLARIFY THAT WHAT WE ARE CALLING THE COMPONENT 
 
 ```
 <div>
@@ -191,7 +188,7 @@ import React from "react";
 
 class FriendsList extends React.Component {
 	constructor( props ) {
-	    super( props );
+	    super( props );  // WHY DO WE PASS IN PROPS INTO SUPER
 	    
 		this.state = {
 			  searchText: ""
@@ -297,7 +294,7 @@ class FriendsList extends React.Component {
 							value={ this.state.orderBy }
 						>
 							<option value="name">Name</option>
-							<option value="friend_count">#Friends</option>
+							<option value="friend_count">#Friends</option>  IS THE # A TYPO???? 
 						</select>
 
 						<select
@@ -326,7 +323,7 @@ ___
 
 ### Step 3: Friend Component, repeating, filtering.
 
-Create a new file named `Friend.js` and follow the usual steps for creating a class with a render method that returns the following JSX:
+Create a new file named `Friend.js` and follow the usual steps for creating a class with a render method that returns the following JSX:   WHERE ARE WE EXPECTED TO PUT FRIEND.JS 
 
 ``` jsx
 <li className='friend'>
@@ -350,7 +347,7 @@ Create a new file named `Friend.js` and follow the usual steps for creating a cl
 
 * Import `Friend` into `FriendsList` and place it inside the `ul` tag at the bottom.
 	* You should now see a single friend listed, but we want to display our whole list!
-* First we need our data, import `friends.js` into `FriendList.js` and save it to a variable named `friends`.
+* First we need our data, import `friends.js` into `FriendList.js` and save it to a variable named `friends`.   MAYBE WE SHOULD BE CLEAR WHAT IS HAPPENING WHEN WE "PASS IN" THESE THINGS 
 * At the top of the render method `map` over the array of friends to create an array of `Friend` components, passing in `friend.name`, `friend.pic_square`, `friend.status`, `friend.friend_count`, and `friend.current_location` as props.
 	* Don't forget that every repeated item in React needs a unique `key`. `friend.$$hashKey` would work well for this.
 	* Be careful of null values!
@@ -370,7 +367,7 @@ class FriendsList extends React.Component {
 
 // ...
     render() {
-		const friendsList = friends.map( friend => (
+		const friendsList = friends.map( friend => (   WHY IS THIS SYNTAX VALID????? 
 			<Friend
 				currentLocation={ friend.current_location || {} }
 				friendCount={ friend.friend_count }
