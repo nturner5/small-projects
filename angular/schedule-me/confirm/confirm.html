@@ -1,0 +1,34 @@
+<div class="page3">
+
+    
+    <div class="coloredHeader">
+        <h1>Confirm Appointment Details</h1>
+        <h2>Verify the information below and submit it to mark your appointment</h2>
+        <img ng-click="toggle()" src="https://api.icons8.com/download/65ae7359047a4bcf39e562e157d9768dd0bc63c9/windows10/PNG/256/User_Interface/delete_sign-256.png" alt="">
+    </div>
+
+    <section class="confirmAddress" >
+        <h3 ng-show="order.name">{{order.name}} </h3>
+        <h3 ng-show="order.phone">Phone: {{order.phone}}</h3>
+        <h3 ng-show="order.Email">Email: {{order.email}}</h3>
+        <h3 ng-show="order.street"> {{order.street}}, {{order.city}} {{order.zip}}</h3> 
+    </section>
+    <section class="confirmOrder" >
+        <h3 ng-show="order.check1">- Window Cleaning {{order.service1}} Windows {{order.service1_2}}</h3>
+        <h3 ng-show="order.check2">- Gutter Cleaning {{order.service2}}sqft {{order.service1_2}}</h3>
+        <h3 ng-show="order.check3">- Pressure Washing order: {{order.service3}} </h3>  
+    </section>
+    <section class="confirmTime" ng-show="order.date">
+        <h4>{{order.date}} at {{order.time}}</h4>
+    </section>
+    <div class="confirmQuote">
+        <div>$</div>
+        <div>{{order.quote}}</div>
+    </div>
+
+    <div class="links">
+        <a ui-sref="home.date"><button class="button3L">Previous</button></a>
+        <a><button class="button3R" ng-click="toggle(); tog()">Submit</button> </a>
+    </div>
+    
+</div>

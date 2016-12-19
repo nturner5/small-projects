@@ -1,0 +1,16 @@
+<div class="header">
+        <h1>Brand and Logo</h1> 
+        <h2>Home</h2>
+        <h2>Services</h2>
+        <h2>Our Work</h2>
+        <h2>Contact</h2>
+</div>
+<ul class="mainpage">
+        <a ui-sref="home"><li><button class="sButton">See our Work</button></li></a>
+        <a  ng-click="toggle()" ui-sref="home.form"><li><button class="pButton" >Request an Appointment</button></li></a> 
+</ul>
+<div class="formview" ng-hide="myValue" ui-view></div>
+<div class="progress" ng-hide="myValue">
+ <md-progress-linear  md-mode="determinate" value="{{order.progress}}"></md-progress-linear>
+</div>
+<div><confirmation ng-show="order.val"></confirmation></div>

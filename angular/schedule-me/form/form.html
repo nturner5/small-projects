@@ -1,0 +1,42 @@
+<div class="page1">
+    <div class="coloredHeader">
+        <h1>Fill out Service Request</h1>
+        <h3>Select which services you need to get started.</h3>
+        <img ng-click="toggle()" src="https://api.icons8.com/download/65ae7359047a4bcf39e562e157d9768dd0bc63c9/windows10/PNG/256/User_Interface/delete_sign-256.png" alt="">
+
+    </div>
+    <form class="formwrapper" action="">
+        <section class="check_section" >
+            <div>Window Cleaning<input type="checkbox" ng-model="order.check1" ng-blur="quoteGenerator()"></div> 
+            <div>Gutter Cleaning<input type="checkbox" ng-model="order.check2" ng-blur="quoteGenerator()"></div> 
+            <div>Pressure Washing<input type="checkbox" ng-model="order.check3" ></div> 
+        </section>
+        <section class="service section1" ng-show="order.check1" >
+            <div><input type="text" ng-model="order.service1" placeholder="Number of Windows" ng-blur="quoteGenerator()" ></div> 
+            <div><select ng-blur="quoteGenerator()" ng-model="order.service1_2" ng-options="x for x in job" ng-required="!order.inout"><option value="" disabled selected >Select your option</option></select></div>
+        </section>
+        <section class="service section2" ng-show="order.check2">
+            <div><input type="text" ng-model="order.service2" placeholder="Square Footage" ng-blur="quoteGenerator()"></div> 
+            <div><select ng-blur="quoteGenerator()" ng-model="order.service2_2" ng-options="x for x in story"><option value="" disabled selected >Select your option</option></select></div>
+        </section>
+        <section class="service section3" ng-show="order.check3">
+            <div><input type="text" ng-model="order.service3" placeholder="Job Description"></div> 
+        </section>
+    </form>
+    
+    <div class="quote">
+        <div>$</div>
+        <div  ng-bind="order.quote">{{order.quote}}</div>
+    </div>
+
+        <button  validator data="order" validate="validate" >Next</button>
+
+       
+
+    
+    
+</div>
+
+   
+
+

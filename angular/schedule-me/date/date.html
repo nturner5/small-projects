@@ -1,0 +1,41 @@
+
+<div class="page2">
+    <img ng-click="toggle()" src="https://api.icons8.com/download/65ae7359047a4bcf39e562e157d9768dd0bc63c9/windows10/PNG/256/User_Interface/delete_sign-256.png" alt="">
+
+    <div class="coloredHeader">
+        <h1>Appointment Day and Time</h1>
+        <h3>Pick a Date and Time that best fits your schedule.</h3>
+        <img ng-click="toggle()" src="https://api.icons8.com/download/65ae7359047a4bcf39e562e157d9768dd0bc63c9/windows10/PNG/256/User_Interface/delete_sign-256.png" alt="">
+
+    </div>
+    
+    <div>
+    <datepicker class="datepick" date-format='EEE MMMM d y' selector="form-control" >
+        <div class="input-group"></div> 
+            <input  class="form-control" placeholder="Select a date" ng-model="theDate" ng-change="dateFilter()" /><br>
+                <span class="input-group-addon" style="cursor: pointer">
+                     <i class="fa fa-lg fa-calendar"></i>
+                </span>
+               
+        <div><select class="timepick" ng-blur="pbar()" ng-model="order.time" ng-options="x for x in time1"><option value="" disabled selected>Select a Time</option></select></div>
+    </datepicker>
+    </div>
+
+
+    <section class="location">
+        <input ng-blur="pbar()" class="street" type="text" ng-model="order.street" placeholder="Street Address  " >
+        <input ng-blur="pbar()" class="city" type="text" ng-model="order.city" placeholder="City" >
+        <input ng-blur="pbar()" class="zip" type="text" ng-model="order.zip" placeholder="Zip-Code" >
+    </section>
+
+    <section class="contact">
+        <input ng-blur="pbar()" class="name" type="text" ng-model="order.name" placeholder="Name" >
+        <input ng-blur="pbar()" class="phone" type="text" ng-model="order.phone" placeholder="phone" >
+        <input ng-blur="pbar()" class="email" type="email" ng-model="order.email" placeholder="email" > 
+    </section>    
+  
+</div>
+    
+        <a ui-sref="home.form"><button class="button2L">Previous</button></a> 
+        <a ui-sref="home.confirm"><button class="button2R">Next</button> </a>
+</div>       
