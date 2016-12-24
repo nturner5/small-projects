@@ -1,1 +1,1 @@
-SELECT productid FROM cart WHERE orderid = ($1);
+SELECT id FROM cart WHERE orderid = $1;

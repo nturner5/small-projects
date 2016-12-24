@@ -4,7 +4,8 @@ var express = require('express'),
     config = require('./config/main'),
     jwt = require('jwt-simple'),
     moment = require('moment'),
-    bcrypt = require('bcrypt-nodejs');
+    bcrypt = require('bcrypt-nodejs'),
+    Q = require('q');
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
   database schema 
@@ -38,6 +39,17 @@ let getSafeUser = user => user;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
   endpoint functions
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+var dbCall = (call, ...args) => {
+  let deffered = Q.defer();
+  db[call](args, (err, data)=>{
+    if (err) console.log(err);
+    deffered.resolve(data);
+  })
+  return deffered.promise; 
+}
+
+
 
 module.exports = {
   login: (req, res, next) => {
@@ -95,35 +107,23 @@ module.exports = {
     })
   },
   addToCart: (req, res, next) => {
-    db.get_order(req.body.userId, (err, order) => {
-      if (err) return next(err);
+    dbCall('get_order', req.body.userId).then(order => {
       if (order[0] && !order[0].completed) {
-        db.add_to_cart([order[0].id, req.body.item], (err, cart) => {
-          if (err) return next(err);
-          db.get_cart(order[0].id, (err, cart) => {
-            if (err) return next(err);
-            return res.send(cart);
-          })
-        })
-      } else {
-        db.create_order(req.body.userId, (err, data) => {
-          if (err) return next(err);
-          db.get_order(req.body.userId, (err, order) => {
-            if (err) return next(err);
-            db.add_to_cart([order[0].id, req.body.item], (err, data) => {
-              if (err) return next(err);
-              db.get_cart(order[0].id, (err, cart) => {
-                if (err) return next(err);
-                return res.send(cart);
-              })
-            })
-          })
-        })
+        dbCall('add_to_cart', order[0].id, req.body.item)
+        .then(cart => dbCall('get_cart', order[0].id))
+        .then(cart => res.send(cart))
+      } 
+      else {
+        dbCall('create_order', req.body.userId)
+        .then(() => dbCall('get_order', req.body.userId))
+        .then(order => dbCall('add_to_cart', order[0].id, req.body.item).then(()=> order))
+        .then(order => dbCall('get_cart', order[0].id))
+        .then(cart => res.send(cart));
       }
     })
   },
+  
   checkOut: (req, res, next) => {
-    // if(err) return res.send('error')
     db.check_out(req.body.userId, (err, data) => {
       if (err) return next(err);
       else res.send([]);

@@ -1,0 +1,35 @@
+
+.Choose_role {
+  background: url("https://c2.staticflickr.com/8/7041/6802639314_935116418a_b.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10%;
+}
+.werewolfImg {
+  opacity: .3;
+  margin-bottom: 10%;
+}
+
+.mainButton {
+  background: rgba(72, 69, 88, .8);
+  color: rgb(220, 220, 220);
+  font-size: 40px;
+  font-weight: 100;
+  width: 85%;
+  height: 100px;
+  text-align: center;
+  padding-top: 50px;
+  margin-bottom: 200px;
+  text-decoration: none;
+}
+
+.backButton{
+  margin-top: 10%;
+  width: 100px;
+  height: 100px;
+}

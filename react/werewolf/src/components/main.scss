@@ -1,0 +1,17 @@
+$backdropGrey: rgba(72, 69, 88, .4);
+$buttonGrey: rgba(72, 69, 88, .8);
+$transparent: rgba(0, 0, 0, 0);
+$lightGrey: rgb(220, 220, 220);
+$forest: url("https://c2.staticflickr.com/8/7041/6802639314_935116418a_b.jpg");
+
+
+
+
+@import "./app/app.scss";
+@import "./login/Login.scss";
+@import "./choose-role/Choose_role.scss";
+@import "./page3/page3.scss";
+@import "./page4/page4.scss";
+
+
+
