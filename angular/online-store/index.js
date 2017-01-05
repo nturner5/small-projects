@@ -1,22 +1,14 @@
 'use strict';
 let config = require('./config/main'),
-  controller = require('./serverCtrl.js'),
-  express = require('express'),
-  app = express(),
-  bodyParser = require('body-parser'),
-  morgan = require('morgan'),
-  // jwt = require('jsonwebtoken'),
-  // session = require('express-session'),
-  // massive = require('massive'),
-  // passport = require('passport'),
-  // JwtStrategy = require('passport-jwt').Strategy,
-  // ExtractJwt = require('passport-jwt').ExtractJwt,
-  jwt = require('jwt-simple'),
-  moment = require('moment');
+    controller = require('./serverCtrl.js'),
+    express = require('express'),
+    app = express(),
+    bodyParser = require('body-parser'),
+    morgan = require('morgan'),
+    jwt = require('jwt-simple'),
+    moment = require('moment');
 
-app.use(bodyParser.urlencoded({
-  extended: false
-}))
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 app.use(express.static('./public'))
 app.use(morgan('dev'))
@@ -25,6 +17,7 @@ app.use(morgan('dev'))
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
   jwt-simple authentication
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 // This middleware checks you JWToken to make sure that you are logged in. 
 let ensureAuthenticated = (req, res, next) => { //use this middleware when... you want the user to be authenticated before hitting an endpoint. Example --> updating personal information or sending a message to someone. 
   if (!req.header('Authorization')) {
@@ -49,6 +42,12 @@ let ensureAuthenticated = (req, res, next) => { //use this middleware when... yo
   req.user = payload.sub;
   next();
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*
+  endpoints
+ *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
 
 app.post('/auth/login', controller.login)
 app.post('/auth/signup', controller.signup)
