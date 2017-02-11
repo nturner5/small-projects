@@ -11,12 +11,12 @@ app.controller('mainCtrl', ($scope, mainService, $auth, $state) => {
     })
     $scope.addToCart = item => {
       mainService.addToCart(item.id, $scope.user.id).then(response => {
-        console.log(response.data);
+        $scope.cart = response;
       })
     }
     $scope.checkOut = () => {
       mainService.checkOut($scope.user.id).then(response => {
-        console.log(response.data);
+        $scope.checkout = response;
       })
     }
 

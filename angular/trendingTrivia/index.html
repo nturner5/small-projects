@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Trivia Trends</title>
+  <link rel="shortcut icon" href="/styles/assets/crownFavicon.png">
+</head>
+
+<body ng-controller="mainCtrl">
+
+  {{broken}}
+
+  <header>
+    <div></div>
+    <h1>Trivia Trends</h1>
+    <button><span>+</span> Add Question</button>
+  </header>
+  <article>
+    <nav>
+      <a>All Questions</a>
+      <a>Easy</a>
+      <a>Medium</a>
+      <a>Hard</a>
+      <a>Search by Animal</a>
+    </nav>
+    <div class="search">
+      <input type="text" placeholder="Animal to search by">
+    </div>
+
+    <!-- Questions go here -->
+    
+
+<button ng-click="nextPage()">NextPage</button>
+<button ng-click="prevPage()">PrevPage</button>
+
+  <div class="question-wrapper" ng-repeat="question in questions">
+
+    
+  <h3>{{question.question}}</h3>
+  <div >{{question.difficulty}}</div>
+  <div class="gear" >
+    <img src="/styles/assets/gear.svg" alt="">
+  </div>
+  <ul>
+    <li  ng-repeat="(key, value) in question.options"  ng-class ="{green: key == question.correct_answer && key == chosen_answer, red: key != question.correct_answer && key == chosen_answer}"> 
+      <input type="radio" name="{{question._id}}" ng-model="chosen_answer" ng-value="key" ng-click="selectAnswer(key)">
+        <label >{{value}}</label>
+    </li>
+  </ul>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  </article>
+
+  <div class="modal">
+    <form>
+      <h4 class="close">X</h4>
+      <span>Question</span><input type="text" ng-model="<!-- Question -->">
+      <span>Animal it's about</span><input type="text" ng-model="<!-- Animal -->">
+      <span>Difficulty</span>
+      <div class="range">
+        <input type="range" min="1" max="3" ng-model="<!-- Difficulty -->">
+
+        <h5>{{newQuestion.difficulty}}</h5>
+      </div>
+      <h4>Options</h4>
+      <div>
+        <input type="radio" ng-model="" value="1">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="2">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="3">
+        <input type="text" ng-model="">
+      </div>
+      <div>
+        <input type="radio" ng-model="" value="4">
+        <input type="text" ng-model="">
+      </div>
+
+      <!--Add question buttons-->
+      <div class="buttons">
+        <button class="green">Save Question</button>
+        <button>Cancel</button>
+      </div>
+
+      <!--Edit & Delete question buttons-->
+      <div class="buttons">
+        <button class="red">Delete Question</button>
+        <button class="green">Save Changes</button>
+        <button>Cancel</button>
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+  <script src="./app.js" charset="utf-8"></script>
+  <script src="./mainCtrl.js" charset="utf-8"></script>
+  <script src="./mainSrv.js" charset="utf-8"></script>
+</body>
+
+</html>
