@@ -77,7 +77,10 @@
 <line class="cls-5" x1="471.67" y1="40.76" x2="467.7" y2="78.52"/>
 <circle class="cls-6" cx="430.69" cy="430.69" r="15.56"/>
 
-<line id="secondhand" class="cls-7" x1="430.69" y1="430.69" x2="153.43" y2="167.23"/>
+<line id="secondhand" class="cls-7" x1="430.69" y1="430.69" x2="153.43" y2="167.23">
+  <animateTransform attributeName="transform" transform-origin="center" type="rotate"
+        from="0 50 50" to="360 50 50" dur="5s" repeatDur="indefinite"/>
+</line>
 <line id="minutehand" class="cls-8" x1="430.69" y1="153.43" x2="430.69" y2="430.69"/>
 <line id="hourhand" class="cls-9" x1="508.26" y1="278.94" x2="430.69" y2="430.69"/>
 
