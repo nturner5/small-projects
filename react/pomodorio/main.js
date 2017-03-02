@@ -3,7 +3,7 @@ setInterval(function() {
     el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
   }
   var d = new Date()
-  r(secondhand, 6*d.getSeconds())  
-  r(minutehand, 6*d.getMinutes())
-  r(hourhand, 30*(d.getHours()%12) + d.getMinutes()/2)
+  r(sec, 6*d.getSeconds())  
+  r(min, 6*d.getMinutes())
+  r(hour, 30*(d.getHours()%12) + d.getMinutes()/2)
 }, 1000)
