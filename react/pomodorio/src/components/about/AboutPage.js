@@ -1,11 +1,12 @@
 import React from 'react';
+import DigitalClock from './DigitalClock';
 
 class AboutPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>About</h1>
-        <p>This application uses react, redux, react router and other things.</p>
+        <h1>Digital Clock</h1>
+        <DigitalClock />
       </div>
     );
   }

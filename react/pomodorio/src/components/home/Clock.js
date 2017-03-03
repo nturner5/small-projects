@@ -1,31 +1,39 @@
 import React from 'react';
-import {Link} from 'react-router';
 
 class Clock extends React.Component {
   constructor(props) {
     super(props);
+    let date = new Date();
+    this.setTime = this.setTime.bind(this);
     this.state = {
-      sec: 15,
-      min: 45,
-      hour: 290,
-      timer: () => {
-        let date = new Date();
-        let sec = (6*date.getSeconds());
-        let min = (6*date.getMinutes());
-        let hour = (30*(date.getHours()%12) + date.getMinutes()/2);
-        this.setState({
-          sec: sec,
-          min: min,
-          hour: hour
-        })
-      }
+      sec: 6 * date.getSeconds(),
+      min: 6 * date.getMinutes(),
+      hour: 30 * (date.getHours()%12) + date.getMinutes()/2
     };
+    
   }  
 
+  componentDidMount(){
+    this.handle = setInterval(this.setTime, 1000);
+  }
 
+  componentWillUnmount(){
+    clearInterval(this.handle);
+  }
+
+  setTime(){
+    let date = new Date();
+    this.setState({
+      sec: 6 * date.getSeconds(),
+      min: 6 * date.getMinutes(),
+      hour: 30 * (date.getHours()%12) + date.getMinutes()/2
+    });
+  }
+     
+  
 
   render(){
-    setTimeout(this.state.timer, 1000)
+   
 
     let sec = {
       transformOrigin: '50px 50px',
@@ -42,7 +50,7 @@ class Clock extends React.Component {
 
     return (
     
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 100 100" >
+        <svg id="analogClock" version="1.1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px" viewBox="0 0 100 100" >
           <g id="body">
             <circle id="borderCircle" className="st0" cx="50" cy="50" r="49.3"/>
             <circle id="bgCircle" className="st1" cx="50" cy="50" r="47.8"/>

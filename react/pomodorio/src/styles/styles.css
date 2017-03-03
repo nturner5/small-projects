@@ -1,3 +1,10 @@
+
+@font-face{
+ font-family:'digital-clock-font';
+ src: url('./digital-7/digital-7.ttf');
+}
+
+
 #app {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #4d4d4d;
@@ -5,7 +12,11 @@
   max-width: 850px;
   margin: 0 auto;
 }
-svg{enable-background:new 0 0 100 100;}
+p{
+  color: lightslategrey;
+}
+
+#analogClock{enable-background:new 0 0 100 100;}
 .st0{fill:#333333;}
 .st1{fill:#1A1A1A;}
 .st2{fill:#FFFFFF;}
@@ -14,3 +25,45 @@ svg{enable-background:new 0 0 100 100;}
 .st5{fill:#E6E6E6;}
 .st6{opacity:0.34;}
 .st7{fill:#C1272D;}
+
+
+.cls-1{fill:#121212;stroke:#242424;stroke-miterlimit:10;}
+.cls-2{fill:none;}
+
+.digitalClock{
+
+}
+.f-object{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 58px;
+}
+
+
+  .numbers {
+    font-size: 20;
+    font-family: 'digital-clock-font';
+    letter-spacing: '2px';
+    color:rgb(51,	213,	229);
+  }
+
+@-webkit-keyframes blink {
+    from {
+        opacity: 1.0;
+    }
+    to {
+        opacity: 0.0;
+    }
+}
+.blink {
+    -webkit-animation-name: blink;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: cubic-bezier(1.0, 0, 0, 1.0);
+    -webkit-animation-duration: 1s;
+    font-size: 20;
+    font-family: 'digital-clock-font';
+    letter-spacing: '2px';
+    color:rgb(51,	213,	229);
+}

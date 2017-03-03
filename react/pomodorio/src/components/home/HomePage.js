@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 import Clock from './Clock';
 
 class HomePage extends React.Component {
-
+  
 
   render(){
     return (
