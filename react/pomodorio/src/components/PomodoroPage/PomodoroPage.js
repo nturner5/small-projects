@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router'; 
 import Clock from './Clock';
 
-class HomePage extends React.Component {
+class PomodoroPage extends React.Component {
   
 
   render(){
@@ -15,8 +15,8 @@ class HomePage extends React.Component {
     );
   }
 }
-
-export default HomePage; 
+ 
+export default PomodoroPage; 
 
 
 
