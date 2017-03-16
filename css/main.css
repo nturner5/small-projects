@@ -1,0 +1,35 @@
+.section1{
+  display: flex;
+  flex-direction: column;
+}
+
+#i1{
+  background: red;
+  width: 100px;
+  height: 100px;
+}
+#i2{
+  background: orange;
+  width: 100px;
+  height: 100px;
+}
+#i3{
+  background: yellow;
+  width: 100px;
+  height: 100px;
+}
+#i4{
+  background: green;
+  width: 100px;
+  height: 100px;
+}
+#i5{
+  background: blue;
+  width: 100px;
+  height: 100px;
+}
+#i6{
+  background: purple;
+  width: 100px;
+  height: 100px;
+}
